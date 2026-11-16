@@ -1,12 +1,11 @@
-package com.university.booking.dto;
+package com.university.booking.dto.person;
 
 import com.university.booking.enums.PersonRole;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class PersonCreateRequest {
+public class PersonDto {
+    private String isuId;
     private String lastName;
     private String firstName;
     private String middleName;

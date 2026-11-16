@@ -1,4 +1,4 @@
-package com.university.booking.dto;
+package com.university.booking.dto.room;
 
 import com.university.booking.enums.PersonRole;
 import lombok.Data;

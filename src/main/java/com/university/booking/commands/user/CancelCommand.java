@@ -1,11 +1,10 @@
 package com.university.booking.commands.user;
 
-import com.university.booking.commands.Command;
-import com.university.booking.commands.CommandType;
-
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.university.booking.client.BackendClient;
+import com.university.booking.commands.Command;
+import com.university.booking.commands.CommandType;
 import com.university.booking.service.dialog.StateService;
 import com.university.booking.service.routing.CommandParser;
 import org.springframework.stereotype.Component;

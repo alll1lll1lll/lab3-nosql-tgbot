@@ -2,7 +2,7 @@ package com.university.booking.commands.user;
 
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.university.booking.dto.RoomDto;
+import com.university.booking.dto.room.RoomDto;
 import com.university.booking.ui.Buttons;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

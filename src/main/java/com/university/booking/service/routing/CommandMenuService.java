@@ -42,9 +42,11 @@ public class CommandMenuService {
         BaseResponse response = telegramBot.execute(
                 new SetMyCommands(commands).scope(new BotCommandsScopeChat(chatId)));
         if (response.isOk()) {
-            log.atInfo().addKeyValue("event", "admin_commands_set").addKeyValue("chat_id", chatId).log("admin bot commands menu updated");
+            log.atInfo().addKeyValue("event", "admin_commands_set").addKeyValue("chat_id", chatId)
+                    .log("admin bot commands menu updated");
         } else {
-            log.atError().addKeyValue("error_code", response.errorCode()).addKeyValue("chat_id", chatId).log("failed to set admin commands");
+            log.atError().addKeyValue("error_code", response.errorCode()).addKeyValue("chat_id", chatId)
+                    .log("failed to set admin commands");
         }
     }
 

@@ -28,6 +28,10 @@ public class Context {
     private Integer bookParticipants;
     private String bookPhone;
 
+    private String eventsQuery;
+    private String eventsTitle;
+    private String eventsNextToken;
+
     public void resetBooking() {
         bookRoomId = null;
         bookCategoryId = null;

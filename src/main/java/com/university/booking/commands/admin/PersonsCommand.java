@@ -1,12 +1,11 @@
 package com.university.booking.commands.admin;
 
-import com.university.booking.commands.Command;
-import com.university.booking.commands.CommandType;
-
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.university.booking.client.BackendClient;
-import com.university.booking.dto.PersonDto;
+import com.university.booking.commands.Command;
+import com.university.booking.commands.CommandType;
+import com.university.booking.dto.person.PersonDto;
 import com.university.booking.enums.PersonRole;
 import com.university.booking.exception.AccessDeniedException;
 import com.university.booking.service.dialog.StateService;

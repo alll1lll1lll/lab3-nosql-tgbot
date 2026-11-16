@@ -1,23 +1,27 @@
 package com.university.booking.client;
 
-import com.university.booking.dto.BookingDto;
-import com.university.booking.dto.CartDto;
-import com.university.booking.dto.BookingRequestDto;
-import com.university.booking.dto.CategoryDto;
-import com.university.booking.dto.ErrorResponseDto;
-import com.university.booking.dto.PersonCreateRequest;
-import com.university.booking.dto.PersonDto;
-import com.university.booking.dto.RoomDto;
-import com.university.booking.dto.RoomScheduleDto;
+import com.university.booking.dto.booking.BookingDto;
+import com.university.booking.dto.booking.BookingRequestDto;
+import com.university.booking.dto.cart.CartDto;
+import com.university.booking.dto.category.CategoryDto;
+import com.university.booking.dto.common.ErrorResponseDto;
+import com.university.booking.dto.event.EventPageDto;
+import com.university.booking.dto.event.EventTypeDto;
+import com.university.booking.dto.person.PersonCreateRequest;
+import com.university.booking.dto.person.PersonDto;
+import com.university.booking.dto.room.RoomDto;
+import com.university.booking.dto.room.RoomScheduleDto;
 import com.university.booking.exception.AccessDeniedException;
 import com.university.booking.exception.BackendException;
 import com.university.booking.exception.BotException;
 import com.university.booking.exception.FeatureUnavailableException;
 import com.university.booking.exception.NotRegisteredException;
 import com.university.booking.exception.ResourceNotFoundException;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +33,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @Service
@@ -134,6 +139,41 @@ public class BackendClient {
                 () -> asList(restTemplate.postForObject(baseUrl + "/api/cart/checkout", null, BookingDto[].class)));
     }
 
+    public String entityEventsQuery(String entityType, String entityId, int size) {
+        return UriComponentsBuilder.fromPath("/api/events/by-entity/{type}/{id}")
+                .queryParam("order", "asc")
+                .queryParam("size", size)
+                .buildAndExpand(entityType, entityId).encode().toUriString();
+    }
+
+    public String typeEventsQuery(String type, String from, String to, int size) {
+        return UriComponentsBuilder.fromPath("/api/events/by-type")
+                .queryParam("type", type)
+                .queryParam("size", size)
+                .queryParamIfPresent("from", Optional.ofNullable(from))
+                .queryParamIfPresent("to", Optional.ofNullable(to))
+                .encode().toUriString();
+    }
+
+    public String actorEventsQuery(String actorId, int size) {
+        return UriComponentsBuilder.fromPath("/api/events/by-actor/{id}")
+                .queryParam("size", size)
+                .buildAndExpand(actorId).encode().toUriString();
+    }
+
+    public EventPageDto getEvents(String query, String pageToken) {
+        URI uri = UriComponentsBuilder.fromUriString(baseUrl + query)
+                .queryParamIfPresent("pageToken", Optional.ofNullable(pageToken))
+                .build(true).toUri();
+        return call("GET " + uri.getPath(), null,
+                () -> requireBody(restTemplate.getForObject(uri, EventPageDto.class)));
+    }
+
+    public List<EventTypeDto> getEventTypes() {
+        return call("GET /api/events/types", null,
+                () -> asList(restTemplate.getForObject(baseUrl + "/api/events/types", EventTypeDto[].class)));
+    }
+
     private <T> T call(String endpoint, String resourceId, Supplier<T> request) {
         try {
             return request.get();
@@ -168,7 +208,6 @@ public class BackendClient {
                 return body.getMessage();
             }
         } catch (RuntimeException ignored) {
-
         }
         return "Запрос отклонён сервером (" + e.getStatusCode().value() + ").";
     }

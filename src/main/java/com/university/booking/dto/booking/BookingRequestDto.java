@@ -1,13 +1,13 @@
-package com.university.booking.dto;
+package com.university.booking.dto.booking;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CartItemDto {
-    private String id;
+@Builder
+public class BookingRequestDto {
     private String roomId;
     private String categoryId;
     private String eventName;
@@ -16,5 +16,4 @@ public class CartItemDto {
     private LocalTime endTime;
     private int participantCount;
     private String contactPhone;
-    private LocalDateTime addedAt;
 }

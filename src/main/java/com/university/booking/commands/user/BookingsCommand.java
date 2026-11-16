@@ -1,13 +1,12 @@
 package com.university.booking.commands.user;
 
-import com.university.booking.commands.Command;
-import com.university.booking.commands.CommandType;
-
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.university.booking.client.BackendClient;
-import com.university.booking.dto.BookingDto;
+import com.university.booking.commands.Command;
+import com.university.booking.commands.CommandType;
+import com.university.booking.dto.booking.BookingDto;
 import com.university.booking.ui.Buttons;
 import java.util.List;
 import java.util.stream.IntStream;

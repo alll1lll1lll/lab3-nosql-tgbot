@@ -1,4 +1,4 @@
-package com.university.booking.dto;
+package com.university.booking.dto.cart;
 
 import java.util.List;
 import lombok.Data;

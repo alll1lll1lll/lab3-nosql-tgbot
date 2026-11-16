@@ -1,8 +1,8 @@
 package com.university.booking.commands.user;
 
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
-import com.university.booking.dto.CartDto;
-import com.university.booking.dto.CartItemDto;
+import com.university.booking.dto.cart.CartDto;
+import com.university.booking.dto.cart.CartItemDto;
 import com.university.booking.ui.Buttons;
 
 public final class CartFormatter {

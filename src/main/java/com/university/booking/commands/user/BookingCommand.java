@@ -1,13 +1,12 @@
 package com.university.booking.commands.user;
 
-import com.university.booking.commands.Command;
-import com.university.booking.commands.CommandType;
-
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.university.booking.client.BackendClient;
-import com.university.booking.dto.BookingDto;
+import com.university.booking.commands.Command;
+import com.university.booking.commands.CommandType;
+import com.university.booking.dto.booking.BookingDto;
 import com.university.booking.enums.BookingStatus;
 import com.university.booking.enums.PersonRole;
 import com.university.booking.service.dialog.StateService;
@@ -75,6 +74,7 @@ public class BookingCommand extends Command {
             actions.add(Buttons.button("Удалить заявку", "/cancel " + b.getId()));
         }
         actions.add(Buttons.button("Занятость комнаты", "/room " + b.getRoomId() + " " + b.getEventDate()));
+        actions.add(Buttons.button("История изменений", "/history " + b.getId()));
         return actions;
     }
 }
